@@ -1,2 +1,2 @@
-# Encryption-using-Monoalphabetic-Cipher
-Using a Html form I have created a user friendly website, which convert Plain text -> Encrypted text and Encrypted text ->Plain text using Monoalphabetic Cipher method.
+I have used Html Form and JavaScript to create a website where I can encrypt or decrypt a given plain text or cypher text with its respective key. 
+Monoalphabetic Cipher is a cipher where the letters of the plain text are mapped to ciphertext letters based on a single alphabetic key. It is a one to one mapping.
