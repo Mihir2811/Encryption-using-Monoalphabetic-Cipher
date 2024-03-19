@@ -40,7 +40,7 @@
 
     button {
         padding: 10px 20px;
-        background-color: #00A36C; /* purple color */
+        background-color: #800080; /* purple color */
         color: white;
         border: none;
         border-radius: 4px;
@@ -56,6 +56,10 @@
         margin-top: 20px;
         text-align: center;
     }
+
+    #copyButton {
+        margin-top: 10px;
+    }
 </style>
 </head>
 <body>
@@ -64,14 +68,14 @@
     <label for="plaintext">Enter Text to Encrypt:</label>
     <textarea id="plaintext" name="plaintext" rows="4" placeholder="Enter plaintext..."></textarea>
     <label for="encryptionKey">Encryption Key:</label>
-    <input type="text" id="encryptionKey" name="encryptionKey" placeholder="Enter encryption key (26 Alphabets Only!)...">
+    <input type="text" id="encryptionKey" name="encryptionKey" placeholder="Enter encryption key...">
     <button type="button" onclick="encrypt()">Encrypt</button>
 </form>
 <form id="decryptionForm">
     <label for="encryptedText">Enter Text to Decrypt:</label>
     <textarea id="encryptedText" name="encryptedText" rows="4" placeholder="Enter encrypted text..."></textarea>
     <label for="decryptionKey">Decryption Key:</label>
-    <input type="text" id="decryptionKey" name="decryptionKey" placeholder="Enter decryption key (26 Alphabets Only!)...">
+    <input type="text" id="decryptionKey" name="decryptionKey" placeholder="Enter decryption key...">
     <button type="button" onclick="decrypt()">Decrypt</button>
 </form>
 <div id="output"></div>
@@ -117,14 +121,26 @@ function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
     const key = document.getElementById('encryptionKey').value;
     const encryptedText = monoalphabeticEncrypt(plaintext, key);
-    document.getElementById('output').innerText = "Encrypted Text: " + encryptedText;
+    document.getElementById('output').innerHTML = "<p>Encrypted Text: " + encryptedText + "</p><button onclick=\"copyText('" + encryptedText + "')\" id=\"copyButton\">Copy Text</button>";
 }
 
 function decrypt() {
     const encryptedText = document.getElementById('encryptedText').value;
     const key = document.getElementById('decryptionKey').value;
     const decryptedText = monoalphabeticDecrypt(encryptedText, key);
-    document.getElementById('output').innerText = "Decrypted Text: " + decryptedText;
+    document.getElementById('output').innerHTML = "<p>Decrypted Text: " + decryptedText + "</p><button onclick=\"copyText('" + decryptedText + "')\" id=\"copyButton\">Copy Text</button>";
+}
+
+function copyText(text) {
+    const textarea = document.createElement('textarea');
+    textarea.textContent = text;
+    document.body.appendChild(textarea);
+
+    textarea.select();
+    document.execCommand('copy');
+
+    document.body.removeChild(textarea);
+    alert('Text copied to clipboard!');
 }
 </script>
 </body>
