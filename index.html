@@ -144,14 +144,14 @@ function monoalphabeticDecrypt(encryptedText, key) {
 
 function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
-    const key = 'qwertyuiopasdfghjklzxcvbnm';
+    const key = document.getElementById('encryptionKey').value;
     const encryptedText = monoalphabeticEncrypt(plaintext, key);
     document.getElementById('output').innerHTML = "<p>Encrypted Text: " + encryptedText + "</p><button onclick=\"copyText('" + encryptedText + "')\" id=\"copyButton\">Copy Text</button>";
 }
 
 function decrypt() {
     const encryptedText = document.getElementById('encryptedText').value;
-    const key = 'qwertyuiopasdfghjklzxcvbnm';
+    const key = document.getElementById('decryptionKey').value;
     const decryptedText = monoalphabeticDecrypt(encryptedText, key);
     document.getElementById('output').innerHTML = "<p>Decrypted Text: " + decryptedText + "</p><button onclick=\"copyText('" + decryptedText + "')\" id=\"copyButton\">Copy Text</button>";
 }
