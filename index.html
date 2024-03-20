@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mihir2811/Monoalphabetic Cipher Encryption and Decryption</title>
+<title>Monoalphabetic Cipher Encryption and Decryption</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -40,7 +40,7 @@
 
     button {
         padding: 10px 20px;
-        background-color: #3CB371; /* green color */
+        background-color: #3CB371; /* purple color */
         color: white;
         border: none;
         border-radius: 4px;
@@ -60,6 +60,20 @@
     #copyButton {
         margin-top: 10px;
     }
+
+    .video-container{
+        width: 50%;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    video{
+        width: 100%;
+        height: auto;
+    }
 </style>
 </head>
 <body>
@@ -68,17 +82,28 @@
     <label for="plaintext">Enter Text to Encrypt:</label>
     <textarea id="plaintext" name="plaintext" rows="4" placeholder="Enter plaintext..."></textarea>
     <label for="encryptionKey">Encryption Key:</label>
-    <input type="text" id="encryptionKey" name="encryptionKey" placeholder="Enter encryption key(26 Characters Only)...">
+    <input type="text" id="encryptionKey" name="encryptionKey" placeholder="Enter encryption key(26 PlainAlphabet Character Only)...">
     <button type="button" onclick="encrypt()">Encrypt</button>
 </form>
 <form id="decryptionForm">
     <label for="encryptedText">Enter Text to Decrypt:</label>
     <textarea id="encryptedText" name="encryptedText" rows="4" placeholder="Enter encrypted text..."></textarea>
     <label for="decryptionKey">Decryption Key:</label>
-    <input type="text" id="decryptionKey" name="decryptionKey" placeholder="Enter decryption key(26 Characters Only)...">
+    <input type="text" id="decryptionKey" name="decryptionKey" placeholder="Enter decryption key(26 PlainAlphabet Character Only)...">
     <button type="button" onclick="decrypt()">Decrypt</button>
 </form>
 <div id="output"></div>
+
+<div id="popup" class="popup-container">
+    <!-- Video container -->
+    <div class="video-container">
+        <!-- Video player -->
+        <video controls>
+            <source src="enc.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
 
 <script>
 function monoalphabeticEncrypt(input, key) {
@@ -119,14 +144,14 @@ function monoalphabeticDecrypt(encryptedText, key) {
 
 function encrypt() {
     const plaintext = document.getElementById('plaintext').value;
-    const key = document.getElementById('encryptionKey').value;
+    const key = 'qwertyuiopasdfghjklzxcvbnm';
     const encryptedText = monoalphabeticEncrypt(plaintext, key);
     document.getElementById('output').innerHTML = "<p>Encrypted Text: " + encryptedText + "</p><button onclick=\"copyText('" + encryptedText + "')\" id=\"copyButton\">Copy Text</button>";
 }
 
 function decrypt() {
     const encryptedText = document.getElementById('encryptedText').value;
-    const key = document.getElementById('decryptionKey').value;
+    const key = 'qwertyuiopasdfghjklzxcvbnm';
     const decryptedText = monoalphabeticDecrypt(encryptedText, key);
     document.getElementById('output').innerHTML = "<p>Decrypted Text: " + decryptedText + "</p><button onclick=\"copyText('" + decryptedText + "')\" id=\"copyButton\">Copy Text</button>";
 }
