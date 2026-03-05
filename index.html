@@ -307,6 +307,46 @@
 
   .error-box.visible { display: block; }
 
+
+  .key-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .key-copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: 1px solid #e0e0de;
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .key-copy-btn svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+
+  .key-copy-btn:hover {
+    background: rgba(46,125,82,0.07);
+    border-color: #2e7d52;
+    color: #2e7d52;
+  }
+
+  .key-copy-btn:active {
+    background: rgba(46,125,82,0.13);
+  }
+
   /* Panel hidden */
   .panel { display: none; }
   .panel.active { display: block; }
@@ -355,12 +395,20 @@
     <div class="field">
       <div class="field-label-row">
         <label class="field-label" for="encKey">Substitution Key (26 unique letters)</label>
-        <button class="generate-btn" id="genEncBtn" onclick="generateKey('enc')" title="Generate random key">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-          </svg>
-          Generate
-        </button>
+        <div class="key-actions">
+          <button class="generate-btn" id="genEncBtn" onclick="generateKey('enc')" title="Generate random key">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+            </svg>
+            Generate
+          </button>
+          <button class="key-copy-btn" onclick="copyKey('encKey', this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy Key
+          </button>
+        </div>
       </div>
       <input class="key-input" type="text" id="encKey" placeholder="e.g.  QWERTYUIOPASDFGHJKLZXCVBNM" maxlength="26" oninput="updateCount('enc')">
       <div class="char-count" id="encCount">0/26 characters</div>
@@ -378,7 +426,7 @@
     <div class="output-box" id="encOutput">
       <div class="output-top">
         <span class="output-tag">Encrypted</span>
-        <button class="copy-link" onclick="copyOutput('encOutputText')">Copy</button>
+        <button class="copy-link" onclick="copyOutput('encOutputText', this)">Copy</button>
       </div>
       <div class="output-text" id="encOutputText"></div>
     </div>
@@ -401,12 +449,20 @@
     <div class="field">
       <div class="field-label-row">
         <label class="field-label" for="decKey">Substitution Key (26 unique letters)</label>
-        <button class="generate-btn" id="genDecBtn" onclick="generateKey('dec')" title="Generate random key">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-          </svg>
-          Generate
-        </button>
+        <div class="key-actions">
+          <button class="generate-btn" id="genDecBtn" onclick="generateKey('dec')" title="Generate random key">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+            </svg>
+            Generate
+          </button>
+          <button class="key-copy-btn" onclick="copyKey('decKey', this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy Key
+          </button>
+        </div>
       </div>
       <input class="key-input" type="text" id="decKey" placeholder="e.g.  QWERTYUIOPASDFGHJKLZXCVBNM" maxlength="26" oninput="updateCount('dec')">
       <div class="char-count" id="decCount">0/26 characters</div>
@@ -424,7 +480,7 @@
     <div class="output-box" id="decOutput">
       <div class="output-top">
         <span class="output-tag">Decrypted</span>
-        <button class="copy-link" onclick="copyOutput('decOutputText')">Copy</button>
+        <button class="copy-link" onclick="copyOutput('decOutputText', this)">Copy</button>
       </div>
       <div class="output-text" id="decOutputText"></div>
     </div>
@@ -531,12 +587,20 @@ function doDecrypt() {
   outBox.classList.add('visible');
 }
 
-function copyOutput(id) {
+function copyOutput(id, btn) {
   const text = document.getElementById(id).textContent;
   navigator.clipboard.writeText(text).then(() => {
-    const btn = event.target;
+
     btn.textContent = 'Copied!';
     setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+function copyKey(inputId, btn) {
+  const val = document.getElementById(inputId).value;
+  if (!val) { btn.textContent = "Empty!"; setTimeout(() => btn.textContent = "Copy Key", 1500); return; }
+  navigator.clipboard.writeText(val).then(() => {
+    btn.textContent = "Copied!";
+    setTimeout(() => btn.textContent = "Copy Key", 1500);
   });
 }
 </script>
